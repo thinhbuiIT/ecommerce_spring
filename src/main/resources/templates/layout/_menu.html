@@ -1,0 +1,63 @@
+<nav class="navbar navbar-expand-lg navbar-light "
+	style="background-color: #76b5e2;">
+	<a class="navbar-brand" th:href="@{/product/list}">Home</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse"
+		data-target="#navbarSupportedContent"
+		aria-controls="navbarSupportedContent" aria-expanded="false"
+		aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item"><a class="nav-link" href="/product/list">Product</a></li>
+			<li class="nav-item" th:if="${#request.remoteUser}">
+				<a class="nav-link" href="/order/list">Your order</a>
+			</li>
+
+			<th:block th:if="${#request.remoteUser}">
+				<!-- <li class="nav-item"> 
+		        	<a class="nav-link" th:href="@{/order/list}">Your Order</a>
+		      	</li>
+		      	<li class="nav-item"> 
+		        	<a class="nav-link" th:href="@{/page/customer}">Customer</a>
+		      	</li>
+		      	<li class="nav-item" th:if="${#request.isUserInRole('DIRE')}"> 
+		        	<a class="nav-link" th:href="@{/page/director}">Dierector</a>
+		      	</li>
+		      	<li class="nav-item" th:if="${#request.isUserInRole('STAF')}"> 
+		        	<a class="nav-link" th:href="@{/page/staff}">Staff</a>
+		      	</li> -->
+		      	<li class="nav-item dropdown" th:if="${#request.isUserInRole('STAF')}">
+		      		<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Manager </a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" th:href="@{/manager/account}">Account</a>
+						<a class="dropdown-item" th:href="@{/manager/product}">Product</a>
+						<!-- <a class="dropdown-item" th:href="@{/manager/order}">Order</a> -->
+					</div>
+				</li>
+			</th:block>
+			<!-- Login and logout -->
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<th:block th:unless="${#request.remoteUser}">
+						<a class="dropdown-item" th:href="@{/security/login/form}">SignUp</a>
+						<hr class="m-0">						
+						<a class="dropdown-item" th:href="@{/security/login/form}">Login</a>
+						<a class="dropdown-item" th:href="@{/security/login/auth2/facebook}">Facebook</a>
+						<a class="dropdown-item" th:href="@{/security/login/auth2/google}">Google</a>
+					</th:block>
+					<th:block th:if="${#request.remoteUser}">
+						<a class="dropdown-item" th:href="@{/security/logoff}">Logout</a>
+						<a class="dropdown-item" th:href="@{/secutity/myInfo}">Infomation</a>
+					</th:block>
+				</div>
+			</li>
+		</ul>
+		<form class="ms-auto d-flex" role="search">
+			<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+			<button class="btn btn-outline-success" type="submit">Search</button>
+		</form>
+	</div>
+</nav>
